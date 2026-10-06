@@ -1,6 +1,8 @@
 # Verification record · 0.1.0 review build
 
-The local test run executed **60 tests successfully**. **Two optional VBT Pro runtime tests were skipped** because that dependency is not installed in the build environment. They are included for execution in a separately licensed environment. No claim of licensed-runtime validation is made for this build.
+The initial local test run executed **60 tests successfully**. **Two optional VBT Pro runtime tests were skipped** because that dependency was not installed in the build environment. They are included for execution in a separately licensed environment. No claim of licensed-runtime validation is made for this build.
+
+Fresh-environment CI exposed a timestamp-unit assumption in fold construction. The implementation now compares intervals in matching units and normalizes timestamps for data hashing. Four additional regression cases cover seconds, milliseconds, microseconds and nanoseconds, bringing the suite to 64 reference test cases plus two optional licensed-runtime cases. The CI matrix covers Python 3.11/3.13 and pandas 2/3. Consult the Actions run for the particular commit rather than treating this document as a live CI status badge.
 
 Checks cover candidate identity, input permutation stability, LHS stratification, malformed OHLC, incomplete resampling, half-open windows, indicator hand calculations, prefix invariance for all six core variants, documented PinBar boundary differences, duplicate/out-of-order callbacks, IH bid/ask order-level math, stop/target ambiguity, gap fills, stage-end exits, costs, result caching, configuration changes, writer locks, empty shortlists and full-demo resume.
 

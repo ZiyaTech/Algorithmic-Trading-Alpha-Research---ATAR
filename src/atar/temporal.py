@@ -68,7 +68,8 @@ def validate_ohlc(frame: pd.DataFrame) -> pd.DataFrame:
 def data_digest(frame: pd.DataFrame) -> str:
     data = validate_ohlc(frame)
     h = hashlib.sha256()
-    h.update(data.index.asi8.astype("<i8").tobytes())
+    # Normalize resolution: asi8 is expressed in the index's unit, not always ns.
+    h.update(data.index.as_unit("ns").asi8.astype("<i8").tobytes())
     h.update(data.to_numpy().astype("<f8").tobytes())
     return h.hexdigest()
 
@@ -92,10 +93,13 @@ def rolling_folds(index: pd.DatetimeIndex, *, warmup: int, train: int,
     sizes = (warmup, train, validation, final, step)
     if any(type(x) is not int or x <= 0 for x in sizes) or step < final:
         raise ValueError("Positive lengths and step >= final are required")
-    if len(index) < 2 or index.tz is None or index.has_duplicates or not index.is_monotonic_increasing:
+    if (not isinstance(index, pd.DatetimeIndex) or len(index) < 2 or index.tz is None
+            or index.hasnans or index.has_duplicates or not index.is_monotonic_increasing):
         raise ValueError("Ordered timezone-aware index required")
     delta = index[1] - index[0]
-    if not (np.diff(index.asi8) == delta.value).all():
+    # Compare like units. Pandas indices may store seconds, ms, us or ns.
+    deltas = np.diff(index.asi8)
+    if not (deltas > 0).all() or not (deltas == deltas[0]).all():
         raise ValueError("Regular index required")
     edges = index.append(pd.DatetimeIndex([index[-1] + delta]))
     folds = []
