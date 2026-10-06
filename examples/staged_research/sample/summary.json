@@ -1,0 +1,28 @@
+{
+  "version": "0.1.0",
+  "candidate_count": 24,
+  "fold_count": 1,
+  "identical_shortlists": true,
+  "avoided_evaluations": 13,
+  "selection_counts": [
+    {
+      "fold": 0,
+      "mode": "eager",
+      "requested_evaluations": 48,
+      "actual_simulations": 48,
+      "cache_hits": 0,
+      "seconds": 1.403241,
+      "shortlist_count": 11
+    },
+    {
+      "fold": 0,
+      "mode": "progressive",
+      "requested_evaluations": 35,
+      "actual_simulations": 35,
+      "cache_hits": 0,
+      "seconds": 1.002681,
+      "shortlist_count": 11
+    }
+  ],
+  "final_rows": 11
+}

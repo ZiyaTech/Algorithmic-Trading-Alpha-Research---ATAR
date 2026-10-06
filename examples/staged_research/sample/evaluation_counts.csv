@@ -1,0 +1,3 @@
+fold,mode,requested_evaluations,actual_simulations,cache_hits,seconds,shortlist_count
+0,eager,48,48,0,1.403241,11
+0,progressive,35,35,0,1.002681,11

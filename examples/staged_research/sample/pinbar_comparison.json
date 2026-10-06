@@ -1,0 +1,9 @@
+{
+  "active_event_jaccard": 1.0,
+  "comparison": "synthetic_completed_bar_reference_vs_ih_signal_core",
+  "matched_events": 72,
+  "serialized_events": 72,
+  "serialized_recall": 1.0,
+  "vectorized_events": 72,
+  "vectorized_recall": 1.0
+}

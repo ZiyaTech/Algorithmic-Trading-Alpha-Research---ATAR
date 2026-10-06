@@ -1,0 +1,7 @@
+{
+  "seed": 2026,
+  "bars": 3200,
+  "windows": {"warmup": 200, "train": 1000, "validation": 700, "final": 700, "step": 700},
+  "train_gate": {"min_trades": 3, "min_return": -0.02, "min_profit_factor": null},
+  "validation_gate": {"min_trades": 2, "min_return": null, "min_profit_factor": 0.8}
+}
